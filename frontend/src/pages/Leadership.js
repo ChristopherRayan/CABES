@@ -66,30 +66,24 @@ export default function Leadership() {
               </div>
               <div className="portrait-details">
                 <h3 className="portrait-name">Ms. Ethel Chilumpha</h3>
-                <div className="education-cards">
-                  <div className="ed-card">
-                    <div className="ed-degree">MSc</div>
-                    <div className="ed-field">Agronomy</div>
-                    <div className="ed-uni">UNIMA</div>
-                  </div>
-                  <div className="ed-card">
-                    <div className="ed-degree">BSc</div>
-                    <div className="ed-field">Agriculture</div>
-                    <div className="ed-uni">UNIMA</div>
-                  </div>
-                </div>
+               <div className="education-cards">
+                   <div className="ed-card">
+                     <div className="ed-degree">BSc</div>
+                     <div className="ed-field">Agriculture</div>
+                     <div className="ed-uni">UNIMA</div>
+                   </div>
+                 </div>
               </div>
-              <div className="portrait-badges">
-                {[
-                  { icon: '🎓', label: 'MSc Agronomy – UNIMA' },
-                  { icon: '📅', label: '20+ Years Experience' },
-                  { icon: '🔬', label: 'ICRISAT Researcher' },
-                ].map(b => (
-                  <div key={b.label} className="p-badge">
-                    <span>{b.icon}</span>{b.label}
-                  </div>
-                ))}
-              </div>
+               <div className="portrait-badges">
+                 {[
+                   { icon: '📅', label: '20+ Years Experience' },
+                   { icon: '🔬', label: 'ICRISAT Researcher' },
+                 ].map(b => (
+                   <div key={b.label} className="p-badge">
+                     <span>{b.icon}</span>{b.label}
+                   </div>
+                 ))}
+               </div>
             </div>
           </div>
 
