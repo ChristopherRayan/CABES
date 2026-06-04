@@ -153,7 +153,7 @@ export default function About() {
             <h2 className="section-title">Learn About Our Products</h2>
             <p className="section-sub" style={{margin:'0 auto 32px'}}>Explore our range of certified grain legume seeds.</p>
             <div style={{display:'flex',gap:'16px',justifyContent:'center',flexWrap:'wrap'}}>
-              <Link to="/shop" className="btn btn-gold">🛒 Shop Seeds</Link>
+              <Link to="/shop" className="btn btn-gold">SHOP</Link>
               <Link to="/contact" className="btn btn-primary">Contact Us</Link>
             </div>
           </div>

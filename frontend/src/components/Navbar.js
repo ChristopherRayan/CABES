@@ -42,7 +42,7 @@ export default function Navbar() {
           {navLinks.map(({ path, label }) => (
             <Link key={path} to={path} className={`nav-link ${pathname === path ? 'active' : ''}`}>{label}</Link>
           ))}
-          <Link to="/shop" className="btn btn-gold nav-shop-btn">🛒 Shop Seeds</Link>
+          <Link to="/shop" className="btn btn-gold nav-shop-btn">SHOP</Link>
         </div>
 
         <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
@@ -54,7 +54,7 @@ export default function Navbar() {
         {navLinks.map(({ path, label }) => (
           <Link key={path} to={path} className={`mobile-link ${pathname === path ? 'active' : ''}`}>{label}</Link>
         ))}
-        <Link to="/shop" className="mobile-link mobile-shop-link">🛒 Shop Seeds</Link>
+        <Link to="/shop" className="mobile-link mobile-shop-link">SHOP</Link>
       </div>
     </nav>
   );

@@ -242,7 +242,7 @@ export default function Home() {
               Whether you're a smallholder farmer, NGO, government institution, or private sector partner — we'd love to work with you.
             </p>
             <div style={{display:'flex', gap:'16px', flexWrap:'wrap'}}>
-              <Link to="/shop" className="btn btn-gold">🛒 Shop Seeds</Link>
+              <Link to="/shop" className="btn btn-gold">SHOP</Link>
               <Link to="/contact" className="btn btn-outline">Contact Us</Link>
             </div>
           </div>

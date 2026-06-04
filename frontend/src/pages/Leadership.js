@@ -67,12 +67,17 @@ export default function Leadership() {
               <div className="portrait-details">
                 <h3 className="portrait-name">Ms. Ethel Chilumpha</h3>
                <div className="education-cards">
-                   <div className="ed-card">
-                     <div className="ed-degree">BSc</div>
-                     <div className="ed-field">Agriculture</div>
-                     <div className="ed-uni">UNIMA</div>
-                   </div>
-                 </div>
+                    <div className="ed-card">
+                      <div className="ed-degree">MSc</div>
+                      <div className="ed-field">Agronomy</div>
+                      <div className="ed-uni">UNIMA</div>
+                    </div>
+                    <div className="ed-card">
+                      <div className="ed-degree">BSc</div>
+                      <div className="ed-field">Agriculture</div>
+                      <div className="ed-uni">UNIMA</div>
+                    </div>
+                  </div>
               </div>
                <div className="portrait-badges">
                  {[
