@@ -1,0 +1,146 @@
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 64px; align-items: start;
+}
+@media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; } }
+
+/* Info */
+.contact-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.contact-card {
+  display: flex; align-items: center; gap: 16px;
+  background: white; border-radius: var(--radius);
+  padding: 16px 20px; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200); transition: var(--transition);
+}
+.contact-card:hover { border-color: var(--green-500); transform: translateX(4px); }
+.cc-icon { font-size: 1.5rem; flex-shrink: 0; }
+.cc-label { font-size: 0.75rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+.cc-value { font-size: 0.92rem; font-weight: 600; color: var(--gray-800); }
+.cc-value a { color: var(--green-600); text-decoration: none; }
+.cc-value a:hover { text-decoration: underline; }
+
+.inquiry-types { background: var(--green-50); border-radius: var(--radius-lg); padding: 20px; }
+.it-title { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-700); margin-bottom: 12px; }
+.it-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.it-tag {
+  background: white; border: 1px solid var(--green-200, #a7d9b8);
+  color: var(--green-700); padding: 6px 14px;
+  border-radius: 100px; font-size: 0.8rem; font-weight: 500;
+}
+
+/* Form */
+.contact-form-wrap {
+  background: white; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+.contact-form { padding: 36px; }
+.form-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem; color: var(--green-900);
+  margin-bottom: 28px; padding-bottom: 20px;
+  border-bottom: 2px solid var(--green-100);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.form-label { font-size: 0.83rem; font-weight: 600; color: var(--gray-700); }
+.form-input {
+  padding: 12px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius); font-family: var(--font-body);
+  font-size: 0.92rem; color: var(--gray-900);
+  background: var(--gray-100);
+  transition: var(--transition); outline: none;
+  width: 100%;
+}
+.form-input:focus {
+  border-color: var(--green-500);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(30,125,62,0.1);
+}
+.form-textarea { resize: vertical; min-height: 120px; }
+.form-submit { width: 100%; justify-content: center; padding: 16px; font-size: 1rem; margin-top: 4px; }
+.form-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; }
+
+.spinner {
+  display: inline-block; width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white; border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Success */
+.success-state {
+  padding: 60px 36px; text-align: center;
+}
+.success-icon { font-size: 3.5rem; margin-bottom: 16px; }
+.success-state h3 {
+  font-family: var(--font-display); font-size: 1.8rem;
+  color: var(--green-800); margin-bottom: 12px;
+}
+.success-state p { color: var(--gray-500); margin-bottom: 28px; line-height: 1.7; }
+
+/* Map */
+.map-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.google-map-iframe {
+  width: 100%;
+  height: 400px;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+
+.map-info-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.map-info-badge {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+}
+
+.badge-pin {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.badge-title {
+  font-weight: 700;
+  color: var(--green-900);
+  font-size: 0.9rem;
+}
+
+.badge-location {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-top: 2px;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; }
+}
+
+/* Reveal */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }

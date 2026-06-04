@@ -1,0 +1,118 @@
+.ach-stats-bar {
+  background: var(--green-900); padding: 40px 0;
+}
+.founder-highlight {
+  padding: 80px 0;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .founder-grid { grid-template-columns: 1fr; }
+}
+.founder-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  min-height: 420px;
+}
+.founder-copy .section-title { margin-bottom: 18px; }
+.founder-copy .section-sub { max-width: 680px; }
+.founder-copy p { color: var(--gray-500); }
+
+.ach-stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+@media (max-width: 768px) { .ach-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.ach-stat { text-align: center; }
+.ach-stat-n {
+  font-family: var(--font-accent); font-size: 2.8rem;
+  color: var(--gold); line-height: 1;
+}
+.ach-stat-l { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 6px; }
+
+/* Achievements grid */
+.ach-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+}
+@media (max-width: 1024px) { .ach-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .ach-grid { grid-template-columns: 1fr; } }
+
+.ach-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  background: white;
+  border: 1px solid var(--gray-200);
+}
+.ach-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.ach-card-top {
+  padding: 28px; color: white;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ach-icon { font-size: 2.2rem; }
+.ach-cat {
+  font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.12em; opacity: 0.7; font-weight: 600;
+}
+.ach-year {
+  font-family: var(--font-accent); font-size: 1rem; opacity: 0.8;
+}
+.ach-card-body { padding: 24px; }
+.ach-title {
+  font-family: var(--font-display); font-size: 1.1rem;
+  color: var(--gray-900); margin-bottom: 10px;
+}
+.ach-desc { color: var(--gray-500); font-size: 0.88rem; line-height: 1.7; }
+
+/* Partners */
+.partners-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px;
+}
+@media (max-width: 1024px) { .partners-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .partners-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.partner-card {
+  background: white; border-radius: var(--radius-lg);
+  padding: 28px 16px; text-align: center;
+  box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+  transition: var(--transition);
+}
+.partner-card:hover { transform: translateY(-4px); border-color: var(--green-500); }
+.partner-icon { font-size: 2rem; margin-bottom: 10px; }
+.partner-name {
+  font-family: var(--font-accent); font-size: 1.3rem;
+  color: var(--green-800); letter-spacing: 0.05em;
+}
+.partner-full { font-size: 0.72rem; color: var(--gray-400); margin-top: 4px; line-height: 1.4; }
+
+/* Outlook */
+.outlook-section {
+  background: linear-gradient(135deg, var(--green-900), var(--green-700));
+}
+.outlook-inner {
+  max-width: 700px;
+}
+.outlook-points {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 14px; margin-top: 28px;
+}
+@media (max-width: 600px) { .outlook-points { grid-template-columns: 1fr; } }
+.outlook-point {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius); padding: 14px 18px;
+  color: rgba(255,255,255,0.85); font-size: 0.92rem; font-weight: 500;
+}
+
+/* Reveal */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
