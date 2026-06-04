@@ -7,34 +7,34 @@ import '../App.css';
 import './Shop.css';
 
 const products = [
-  {
-    id: 1, img: soybeansImg, name: 'Certified Soybeans – Class 1',
-    shortName: 'Soybeans',
-    price: 12000, unit: '25 kg bag',
-    desc: 'High-protein soybean certified seed. Superior germination rate, disease resistant, adapted for Malawi agro-ecology.',
-    features: ['High protein content','Drought tolerant','Improved nodulation','Market-grade quality'],
-    stock: 'Available', badge: 'Best Seller', badgeColor: '#1e7d3e',
-    sizes: [{ label:'10 kg bag', price:5500 },{ label:'25 kg bag', price:12000 },{ label:'50 kg bag', price:22000 }],
-  },
-  {
-    id: 2, img: groundnutsImg, name: 'Certified Groundnuts – Class 1',
-    shortName: 'Groundnuts',
-    price: 9500, unit: '25 kg bag',
-    desc: 'ICRISAT research-backed groundnut varieties. Genetic purity assured, high oil content, aflatoxin-resistant.',
-    features: ['ICRISAT research-backed','Genetic purity assured','High oil content','Aflatoxin-resistant'],
-    stock: 'Available', badge: 'ICRISAT Backed', badgeColor: '#7c3aed',
-    sizes: [{ label:'10 kg bag', price:4000 },{ label:'25 kg bag', price:9500 },{ label:'50 kg bag', price:18000 }],
-  },
-  {
-    id: 3, img: beansImg, name: 'Certified Common Beans – Class 1',
-    shortName: 'Common Beans',
-    price: 8000, unit: '25 kg bag',
-    desc: 'Fast-maturing certified common bean seed. Ideal for smallholder farmers across the Lilongwe–Kasungu plains.',
-    features: ['Fast maturing','High nutritional value','Strong market demand','Intercrop-friendly'],
-    stock: 'Available', badge: 'FAO Supported', badgeColor: '#2563eb',
-    sizes: [{ label:'10 kg bag', price:3500 },{ label:'25 kg bag', price:8000 },{ label:'50 kg bag', price:15000 }],
-  },
-];
+   {
+     id: 1, img: soybeansImg, name: 'Certified Soybeans – Class 1',
+     shortName: 'Soybeans',
+     price: 175000, unit: '25 kg bag',
+     desc: 'High-protein soybean certified seed. Superior germination rate, disease resistant, adapted for Malawi agro-ecology.',
+     features: ['High protein content','Drought tolerant','Improved nodulation','Market-grade quality'],
+     stock: 'Available', badge: 'Best Seller', badgeColor: '#1e7d3e',
+     sizes: [{ label:'10 kg bag', price:70000 },{ label:'25 kg bag', price:175000 },{ label:'50 kg bag', price:350000 }],
+   },
+   {
+     id: 2, img: groundnutsImg, name: 'Certified Groundnuts – Class 1',
+     shortName: 'Groundnuts',
+     price: 125000, unit: '25 kg bag',
+     desc: 'ICRISAT research-backed groundnut varieties. Genetic purity assured, high oil content, aflatoxin-resistant.',
+     features: ['ICRISAT research-backed','Genetic purity assured','High oil content','Aflatoxin-resistant'],
+     stock: 'Available', badge: 'ICRISAT Backed', badgeColor: '#7c3aed',
+     sizes: [{ label:'10 kg bag', price:50000 },{ label:'25 kg bag', price:125000 },{ label:'50 kg bag', price:250000 }],
+   },
+   {
+     id: 3, img: beansImg, name: 'Certified Common Beans – Class 1',
+     shortName: 'Common Beans',
+     price: 325000, unit: '25 kg bag',
+     desc: 'Fast-maturing certified common bean seed. Ideal for smallholder farmers across the Lilongwe–Kasungu plains.',
+     features: ['Fast maturing','High nutritional value','Strong market demand','Intercrop-friendly'],
+     stock: 'Available', badge: 'FAO Supported', badgeColor: '#2563eb',
+     sizes: [{ label:'10 kg bag', price:130000 },{ label:'25 kg bag', price:325000 },{ label:'50 kg bag', price:650000 }],
+   },
+ ];
 
 function ProductCard({ product, onOrder }) {
   const [selectedSize, setSelectedSize] = useState(1);
