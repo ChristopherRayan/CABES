@@ -31,13 +31,12 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="container navbar-inner">
-        <Link to="/" className="navbar-logo">
-          <img src={scrolled ? logoWhite : logoGreen} alt="CABES Logo" className="logo-img" />
-          <div className="logo-text">
-            <span className="logo-name">CABES</span>
-            <span className="logo-tagline">Certified Seed Production</span>
-          </div>
-        </Link>
+         <Link to="/" className="navbar-logo">
+           <img src={scrolled ? logoWhite : logoGreen} alt="CABES Logo" className="logo-img" />
+           <div className="logo-text">
+             <span className="logo-tagline">Certified Seed Production</span>
+           </div>
+         </Link>
 
         <div className="navbar-links">
           {navLinks.map(({ path, label }) => (

@@ -12,13 +12,9 @@
 .navbar-logo { display:flex;align-items:center;gap:10px;text-decoration:none; }
 .logo-img { height:62px;width:auto;object-fit:contain;margin-left:-10px; }
 .logo-text { display:flex;flex-direction:column; }
-.logo-name {
-  font-family:var(--font-accent);font-size:1.5rem;letter-spacing:0.08em;
-  color:white;line-height:1;transition:var(--transition);
-}
-.navbar-scrolled .logo-name { color:var(--green-800); }
-.logo-tagline { font-size:0.6rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:0.1em;display:none; }
-.navbar-scrolled .logo-tagline { display:block;color:var(--gray-400); }
+
+.logo-tagline { font-size:0.6rem;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:0.1em;display:block;transition:var(--transition); }
+.navbar-scrolled .logo-tagline { color:var(--gray-700); }
 
 /* Desktop links */
 .navbar-links { display:flex;align-items:center;gap:2px; }
