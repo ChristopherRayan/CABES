@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ethelImg from '../assets/ethel.jpeg';
 import field1Img from '../assets/field1.jpeg';
@@ -31,6 +31,17 @@ const timeline = [
 ];
 
 export default function Leadership() {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/content/leadership')
+      .then(r => r.json())
+      .then(data => { if (!cancelled) setContent(data); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -58,14 +69,14 @@ export default function Leadership() {
           <div className="portrait-col reveal">
             <div className="portrait-card">
               <div className="portrait-photo-wrap">
-                <img src={ethelImg} alt="Ms. Ethel Chilumpha" className="portrait-photo" />
-                <div className="portrait-photo-ring"/>
+                <img src={content.ceoPortrait || ethelImg} alt="Ms. Ethel Chilumpha" className="portrait-photo" />
+                 <div className="portrait-photo-ring"></div>
                 <div className="portrait-title-badge">
                   <span>🌱</span> Founder & Managing Director
                 </div>
               </div>
               <div className="portrait-details">
-                <h3 className="portrait-name">Ms. Ethel Chilumpha</h3>
+                <h3 className="portrait-name">{content.ceoName || 'Ms. Ethel Chilumpha'}</h3>
                <div className="education-cards">
                     <div className="ed-card">
                       <div className="ed-degree">MSc</div>
@@ -80,15 +91,15 @@ export default function Leadership() {
                   </div>
               </div>
                <div className="portrait-badges">
-                 {[
-                   { icon: '📅', label: '20+ Years Experience' },
-                   { icon: '🔬', label: 'ICRISAT Researcher' },
-                 ].map(b => (
-                   <div key={b.label} className="p-badge">
-                     <span>{b.icon}</span>{b.label}
-                   </div>
-                 ))}
-               </div>
+                  {[
+                    { icon: '📅', label: '20+ Years Experience' },
+                    { icon: '🔬', label: 'ICRISAT Researcher' },
+                  ].map(b => (
+                    <div key={b.label} className="p-badge">
+                      <span>{b.icon}</span>{b.label}
+                    </div>
+                  ))}
+                </div>
             </div>
           </div>
 
@@ -125,7 +136,7 @@ export default function Leadership() {
 
       {/* Field image banner */}
       <div className="leader-field-banner">
-        <img src={field1Img} alt="CABES fields" />
+        <img src={content.fieldWorkPhoto || field1Img} alt="CABES fields" />
         <div className="lfb-overlay">
           <div className="lfb-text">Leading from the Field to the Market</div>
         </div>
@@ -146,7 +157,7 @@ export default function Leadership() {
                   <span className="exp-label">{e.area}</span>
                   <span className="exp-pct">{e.level}%</span>
                 </div>
-                <div className="exp-bar"><div className="exp-fill" style={{width:`${e.level}%`}}/></div>
+                <div className="exp-bar"><div className="exp-fill" style={{width:`${e.level}%`}}></div></div>
               </div>
             ))}
           </div>
@@ -164,7 +175,7 @@ export default function Leadership() {
             {timeline.map((t,i) => (
               <div key={t.year} className={`timeline-item reveal ${i%2===0?'tl-left':'tl-right'}`} style={{animationDelay:`${i*0.1}s`}}>
                 <div className="tl-year">{t.year}</div>
-                <div className="tl-dot"/>
+                 <div className="tl-dot"></div>
                 <div className="tl-content"><h4>{t.event}</h4><p>{t.detail}</p></div>
               </div>
             ))}
@@ -177,7 +188,7 @@ export default function Leadership() {
         <div className="container">
           <div className="infield-grid">
             <div className="infield-img-wrap reveal" style={{animationDelay:'0.1s'}}>
-              <img src={ethelFieldImg} alt="Ms. Ethel Chilumpha in the field" />
+              <img src={content.fieldWorkPhoto || ethelFieldImg} alt="Ms. Ethel Chilumpha in the field" />
               <div className="infield-overlay">
                 <div className="infield-quote">
                   "Imparting technical skills to smallholder farmers — specifically women."
@@ -241,7 +252,7 @@ export default function Leadership() {
               </div>
             </div>
             <div className="infield-img-wrap reveal" style={{animationDelay:'0.15s'}}>
-              <img src={ethelField2Img} alt="CABES farm during soybean seed harvesting" />
+              <img src={content.harvestingPhoto || ethelField2Img} alt="CABES farm during soybean seed harvesting" />
               <div className="infield-overlay">
                 <div className="infield-quote">
                   "Translating the technical skills into action, this is CABES farm during soybeans seed harvesting process."

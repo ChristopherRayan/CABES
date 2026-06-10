@@ -7,6 +7,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', type: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [contactInfo, setContactInfo] = useState({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -15,6 +16,13 @@ export default function Contact() {
     );
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/content/contact')
+      .then(r => r.json())
+      .then(data => setContactInfo(data))
+      .catch(() => {});
   }, []);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -54,7 +62,7 @@ export default function Contact() {
                 <div className="cc-icon">📍</div>
                 <div>
                   <div className="cc-label">Headquarters</div>
-                  <div className="cc-value">Area 49, Lilongwe, Malawi</div>
+                  <div className="cc-value">{contactInfo.address || 'Area 49, Lilongwe, Malawi'}</div>
                 </div>
               </div>
               <div className="contact-card">
@@ -62,7 +70,7 @@ export default function Contact() {
                 <div>
                   <div className="cc-label">Email Address</div>
                   <div className="cc-value">
-                    <a href="mailto:cabesmw@gmail.com">cabesmw@gmail.com</a>
+                    <a href={`mailto:${contactInfo.email || 'cabesmw@gmail.com'}`}>{contactInfo.email || 'cabesmw@gmail.com'}</a>
                   </div>
                 </div>
               </div>
@@ -77,14 +85,14 @@ export default function Contact() {
                 <div className="cc-icon">⏰</div>
                 <div>
                   <div className="cc-label">Business Hours</div>
-                  <div className="cc-value">Monday – Friday: 8:00 AM – 5:00 PM</div>
+                  <div className="cc-value">{contactInfo.businessHours || 'Monday – Friday: 8:00 AM – 5:00 PM'}</div>
                 </div>
               </div>
               <div className="contact-card">
                 <div className="cc-icon">📋</div>
                 <div>
                   <div className="cc-label">Registration Number</div>
-                  <div className="cc-value">MBRS1032430</div>
+                  <div className="cc-value">{contactInfo.registration || 'MBRS1032430'}</div>
                 </div>
               </div>
             </div>

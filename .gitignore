@@ -1,5 +1,42 @@
+# Dependencies
 node_modules/
+*/node_modules/
+
+# MongoDB data
+backend/data/
+data/
+*.wt
+*.lock
+mongod.lock
+WiredTiger*
+storage.bson
+diagnostic.data/
+journal/
+
+# Uploads
+backend/uploads/
+uploads/
+
+# Environment
 .env
+.env.local
+.env.*.local
+
+# Build
 build/
 dist/
+
+# OS
 .DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+backend/mongod.log

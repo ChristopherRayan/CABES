@@ -49,6 +49,17 @@ const partners = [
 ];
 
 export default function Achievements() {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/content/achievements')
+      .then(r => r.json())
+      .then(data => { if (!cancelled) setContent(data); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -66,8 +77,8 @@ export default function Achievements() {
           <div className="breadcrumb">
             <Link to="/">Home</Link> <span>/</span> <span>Achievements</span>
           </div>
-          <h1>Key Achievements</h1>
-          <p>A track record of partnerships, awards, research contributions, and consistent growth since 2018.</p>
+          <h1>{content.achTitle || 'Key Achievements'}</h1>
+          <p>{content.achSubtitle || 'A track record of partnerships, awards, and consistent growth since 2018.'}</p>
         </div>
       </section>
 
@@ -92,7 +103,7 @@ export default function Achievements() {
       <section className="section section-alt founder-highlight">
         <div className="container founder-grid">
           <div className="founder-photo reveal">
-            <img src={ethelImg} alt="CABES Founder Ms. Ethel Chilumpha" />
+            <img src={content.founderSpotlight || ethelImg} alt="CABES Founder Ms. Ethel Chilumpha" />
           </div>
           <div className="founder-copy reveal">
             <div className="section-badge">👩‍🌾 Founder Spotlight</div>

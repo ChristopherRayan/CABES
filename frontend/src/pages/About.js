@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import field1Img from '../assets/field1.jpeg';
 import field2Img from '../assets/field2.jpeg';
@@ -6,6 +6,17 @@ import '../App.css';
 import './About.css';
 
 export default function About() {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/content/about')
+      .then(r => r.json())
+      .then(data => { if (!cancelled) setContent(data); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -19,7 +30,7 @@ export default function About() {
     <div className="page">
       {/* ── HERO with real field image ── */}
       <section className="about-hero">
-        <img src={field1Img} alt="CABES fields" className="about-hero-bg" />
+        <img src={content.aboutHeroBg || field1Img} alt="CABES fields" className="about-hero-bg" />
         <div className="about-hero-overlay"/>
         <div className="container about-hero-content">
           <div className="breadcrumb">
@@ -45,10 +56,7 @@ export default function About() {
             <div className="section-badge">🌿 Overview</div>
             <h2 className="section-title">Grounded in Compliance,<br/>Driven by Impact</h2>
             <p className="section-sub">
-              CABES Company is a legally registered agribusiness operating under the Business Registration Act of 2012. Founded in 2018, we specialize in the production and distribution of certified seed for grain legumes — soybeans, groundnuts, and common beans.
-            </p>
-            <p className="section-sub" style={{marginTop:16}}>
-              Operating in accordance with the Malawi Seed Act (2022), all our seed meets national certification standards for quality, purity, and germination. Our seed production activities are based in the Lilongwe–Kasungu plains.
+              {content.aboutBody || 'CABES Company is a legally registered agribusiness operating under the Business Registration Act of 2012. Founded in 2018, we specialize in the production and distribution of certified seed for grain legumes — soybeans, groundnuts, and common beans.'}
             </p>
           </div>
           <div className="about-info-card reveal">
@@ -140,7 +148,7 @@ export default function About() {
           </div>
           <div className="reveal">
             <div className="about-field-img">
-              <img src={field2Img} alt="CABES bean fields" />
+              <img src={content.aboutLocationImg || field2Img} alt="CABES bean fields" />
               <div className="afi-caption">Bean crop production — Lilongwe–Kasungu Plains</div>
             </div>
           </div>

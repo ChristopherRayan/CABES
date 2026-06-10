@@ -142,3 +142,8 @@
 /* Reveal */
 .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease; }
 .reveal.visible { opacity:1;transform:translateY(0); }
+
+.sc-size-out { opacity:0.5;cursor:not-allowed; }
+.sc-out-badge { position:absolute;bottom:12px;left:12px;background:var(--red);color:white;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700; }
+.sc-discount-badge { position:absolute;bottom:12px;right:12px;background:var(--gold);color:#111;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:800; }
+.ssz-limited { font-size:9px;background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:100px;font-weight:700;margin-left:4px; }

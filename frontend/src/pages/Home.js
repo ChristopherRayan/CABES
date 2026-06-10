@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import beansImg from '../assets/beans.jpeg';
 import groundnutsImg from '../assets/groundnuts.jpg';
@@ -23,6 +23,31 @@ const values = [
 ];
 
 export default function Home() {
+  const [hero, setHero] = useState({ title: 'Growing Malawi\'s Agricultural Future', subtitle: 'Premium certified seeds for Malawi\'s farmers', ctaText: 'Shop Seeds' });
+  const [cms, setCms] = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([
+      fetch('/api/content/hero').then(r => r.json()),
+      fetch('/api/content/about').then(r => r.json()),
+      fetch('/api/content/home').then(r => r.json()),
+    ])
+      .then(([heroData, aboutData, homeData]) => {
+        if (cancelled) return;
+        if (Object.keys(heroData).length) {
+          setHero({
+            title: heroData.heroTitle || hero.title,
+            subtitle: heroData.heroSubtitle || hero.subtitle,
+            ctaText: heroData.heroCtaText || hero.ctaText
+          });
+        }
+        setCms({ ...aboutData, ...homeData });
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
@@ -37,14 +62,13 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="hero">
-        <div className="hero-bg">
-          <div className="hero-orb hero-orb-1"/>
-          <div className="hero-orb hero-orb-2"/>
-          <div className="hero-pattern"/>
-        </div>
+          <div className="hero-bg">
+            <div className="hero-orb hero-orb-1"></div>
+            <div className="hero-orb hero-orb-2"></div>
+            <div className="hero-pattern"></div>
+          </div>
 
         <div className="container hero-content">
-          {/* LEFT: Text */}
           <div className="hero-text">
             <div className="hero-badge fade-up" style={{animationDelay:'0.1s'}}>
               <span className="badge-dot"/>
@@ -56,10 +80,10 @@ export default function Home() {
               Future
             </h1>
             <p className="hero-sub fade-up" style={{animationDelay:'0.35s'}}>
-              CABES Company produces certified seed for grain legumes — soybeans, groundnuts, and common beans — empowering smallholder farmers across Malawi with quality, purity, and reliability.
+              {hero.subtitle || 'CABES Company produces certified seed for grain legumes — soybeans, groundnuts, and common beans — empowering smallholder farmers across Malawi with quality, purity, and reliability.'}
             </p>
             <div className="hero-actions fade-up" style={{animationDelay:'0.5s'}}>
-              <Link to="/shop" className="btn btn-gold">🛒 Order Seeds Now</Link>
+              <Link to="/shop" className="btn btn-gold">🛒 {hero.ctaText || 'Order Seeds Now'}</Link>
               <Link to="/about" className="btn btn-outline">Learn More</Link>
             </div>
             <div className="hero-compliance fade-up" style={{animationDelay:'0.65s'}}>
@@ -68,33 +92,30 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT: Honeycomb hexagon cluster */}
           <div className="hero-honeycomb fade-in" style={{animationDelay:'0.4s'}}>
             <div className="hc-wrap">
               <div className="hex hex-left-top">
                 <div className="hex-inner">
-                  <img src={soybeansImg} alt="Certified Soybeans" />
+                  <img src={cms.honeycombSoybeans || soybeansImg} alt="Certified Soybeans" />
                   <div className="hex-label">Soybeans</div>
                 </div>
               </div>
               <div className="hex hex-left-bottom">
                 <div className="hex-inner">
-                  <img src={groundnutsImg} alt="Certified Groundnuts" />
+                  <img src={cms.honeycombGroundnuts || groundnutsImg} alt="Certified Groundnuts" />
                   <div className="hex-label">Groundnuts</div>
                 </div>
               </div>
               <div className="hex hex-right">
                 <div className="hex-inner">
-                  <img src={beansImg} alt="Certified Beans" />
+                  <img src={cms.honeycombBeans || beansImg} alt="Certified Beans" />
                   <div className="hex-label">Common Beans</div>
                 </div>
               </div>
-              {/* Floating tags removed (awards shown elsewhere) */}
             </div>
           </div>
         </div>
 
-        {/* Stats bar */}
         <div className="hero-stats-bar">
           <div className="container hero-stats-grid">
             {stats.map((s, i) => (
@@ -136,16 +157,15 @@ export default function Home() {
             <Link to="/about" className="btn btn-primary">Full Company Profile →</Link>
           </div>
 
-          {/* Field photo collage */}
           <div className="field-collage reveal">
             <div className="fc-main">
-              <img src={field1Img} alt="CABES soybean field" />
+              <img src={cms.aboutCollageMain || field1Img} alt="CABES soybean field" />
               <div className="fc-overlay">
                 <span>🌱 Lilongwe–Kasungu Plains</span>
               </div>
             </div>
             <div className="fc-secondary">
-              <img src={field2Img} alt="CABES bean field" />
+              <img src={cms.aboutCollageSecondary || field2Img} alt="CABES bean field" />
               <div className="fc-badge">
                 <span>📍</span> Our Fields
               </div>
@@ -220,7 +240,7 @@ export default function Home() {
                 { icon: '🔬', label: 'Integrated Pest & Disease Management (IPDM)' },
                 { icon: '🌤️', label: 'Climate-Smart Agriculture (CSA)' },
               ].map(p => (
-                <div key={p.label} className="strategy-point"><span>{p.icon}</span> {p.label}</div>
+                <div key={p.label} className="strategy-point"><span>{p.label}</span> {p.label}</div>
               ))}
             </div>
           </div>
