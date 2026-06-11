@@ -3,13 +3,13 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');
-const fs = require('fs');
 
 dotenv.config();
 const app = express();
 
 const allowedOrigins = [
   process.env.CLIENT_URL,
+  'https://cabes-six.vercel.app',
   'https://*.vercel.app',
   'http://localhost:3000',
   'http://localhost:3001',
@@ -18,11 +18,6 @@ const allowedOrigins = [
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Ensure uploads directory exists (ephemeral on Render)
-const uploadsDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
-app.use('/uploads', express.static(uploadsDir));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
