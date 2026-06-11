@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: cabes-backend
+    runtime: node
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://cabes-database:Christopher%245g@cluster0.lxhpypa.mongodb.net/cabes?retryWrites=true&w=majority&appName=Cluster0
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://cabes-website.vercel.app
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dibzhtxo0
+      - key: CLOUDINARY_API_KEY
+        value: 842682121697876
+      - key: CLOUDINARY_API_SECRET
+        value: 0qy0W4HJ7BtmJ9UMq2E4VQsZybE
+      - key: EMAIL_USER
+        value: cabesmw@gmail.com
+      - key: EMAIL_PASS
+        value: ""
+      - key: ADMIN_EMAIL
+        value: admin@cabes.mw
+      - key: ADMIN_PASSWORD
+        value: ""
