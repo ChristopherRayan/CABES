@@ -5,6 +5,6 @@
   ],
   "routes": [{ "handle": "filesystem" }],
   "env": {
-    "REACT_APP_API_URL": "https://cabes-backend.onrender.com"
+    "REACT_APP_API_URL": "https://cabes.onrender.com"
   }
 }
