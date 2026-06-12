@@ -39,6 +39,20 @@ const connectDB = async () => {
       socketTimeoutMS: 45000,
     });
     console.log('MongoDB connected');
+
+    // Auto-seed admin if missing (for fresh deployments)
+    const adminCount = await mongoose.model('Admin').countDocuments();
+    if (adminCount === 0) {
+      console.log('No admin found, creating default...');
+      const Admin = require('./models/Admin');
+      await Admin.create({
+        name: 'Admin User',
+        email: process.env.ADMIN_EMAIL || 'admin@cabes.mw',
+        password: process.env.ADMIN_PASSWORD || 'Cabes@2024!',
+        role: 'superadmin'
+      });
+      console.log('Default admin created');
+    }
   } catch (err) {
     console.error('MongoDB connection error:', err.message);
     console.log('Retrying in 5 seconds...');
