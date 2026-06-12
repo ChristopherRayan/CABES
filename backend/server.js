@@ -41,10 +41,10 @@ const connectDB = async () => {
     console.log('MongoDB connected');
 
     // Auto-seed admin if missing (for fresh deployments)
-    const adminCount = await mongoose.model('Admin').countDocuments();
+    const Admin = require('./models/Admin');
+    const adminCount = await Admin.countDocuments();
     if (adminCount === 0) {
       console.log('No admin found, creating default...');
-      const Admin = require('./models/Admin');
       await Admin.create({
         name: 'Admin User',
         email: process.env.ADMIN_EMAIL || 'admin@cabes.mw',
