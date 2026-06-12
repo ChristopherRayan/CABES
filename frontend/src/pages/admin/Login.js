@@ -23,55 +23,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!authReady) return;
     if (!validateForm()) return;
     setLoading(true);
-
-  if (!authReady) {
-    return (
-      <div className="login-page">
-        <div className="login-left">
-          <div className="ll-content">
-            <div className="ll-logo">
-              <div className="ll-logo-icon">
-                <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="19" stroke="#4ab86e" strokeWidth="2"/>
-                  <rect x="10" y="22" width="5" height="10" fill="#4ab86e"/>
-                  <rect x="17" y="17" width="5" height="15" fill="#f4b400"/>
-                  <rect x="24" y="12" width="5" height="20" fill="#2563eb"/>
-                  <path d="M8 28 Q14 16 20 20 Q26 24 32 12" stroke="#4ab86e" strokeWidth="2" fill="none" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <div>
-                <div className="ll-brand">CABES Admin</div>
-                <div className="ll-sub">Content Management System</div>
-              </div>
-            </div>
-            <h1 className="ll-title">Manage Your<br/>Agricultural<br/>Business</h1>
-            <p className="ll-desc">Update website content, manage seed orders, respond to inquiries, and track your business — all in one place.</p>
-            <div className="ll-features">
-              {['📦 Manage seed orders & track status','✉️ Respond to customer inquiries','✏️ Edit website content live','📊 View business dashboard','🖼️ Upload product images'].map(f => (
-                <div key={f} className="ll-feature">{f}</div>
-              ))}
-            </div>
-          </div>
-          <div className="ll-footer">© {new Date().getFullYear()} CABES Company · Area 49, Lilongwe, Malawi</div>
-        </div>
-        <div className="login-right">
-          <div className="login-card animate-in">
-            <div className="lc-header">
-              <h2>Loading...</h2>
-              <p>Checking authentication status</p>
-            </div>
-            <div className="spinner" style={{margin:'32px auto'}}/>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(''); setLoading(true);
+    setError('');
     try {
       await login(email, password);
       navigate('/admin');
