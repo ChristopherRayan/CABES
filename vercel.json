@@ -3,10 +3,7 @@
   "builds": [
     { "src": "frontend/package.json", "use": "@vercel/static-build", "config": { "distDir": "build" } }
   ],
-  "routes": [
-    { "source": "/api/:path*", "destination": "https://cabes.onrender.com/api/:path*" },
-    { "handle": "filesystem" }
-  ],
+  "routes": [{ "handle": "filesystem" }],
   "env": {
     "REACT_APP_API_URL": "https://cabes.onrender.com"
   }
