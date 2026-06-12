@@ -59,11 +59,16 @@ router.post('/seed', async (req, res) => {
     { section: 'products', key: 'beansPrice50kgDiscount', value: '', type: 'text', label: 'Beans 50kg Discount %' },
   ];
   try {
-    await Content.deleteMany({});
-    await Content.insertMany(defaultContent);
+    for (const item of defaultContent) {
+      const existing = await Content.findOne({ section: item.section, key: item.key });
+      if (!existing) {
+        await Content.create({ ...item, updatedAt: new Date(), updatedBy: 'system' });
+      }
+    }
     res.json({ message: 'Content seeded', count: defaultContent.length });
   } catch (err) {
-    res.status(500).json({ error: 'Seed failed' });
+    console.error('Seed error:', err);
+    res.status(500).json({ error: 'Seed failed', details: err.message });
   }
 });
 
