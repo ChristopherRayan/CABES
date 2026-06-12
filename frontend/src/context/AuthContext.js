@@ -1,14 +1,20 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 const AuthContext = createContext(null);
-const API = process.env.REACT_APP_API_URL || '/api';
 
 // Helper to build full endpoint URL
+const getBaseURL = () => {
+  const api = process.env.REACT_APP_API_URL;
+  if (api && api.startsWith('http')) return api;
+  return '';
+};
+
 const buildEndpoint = (endpoint) => {
-  // If API already points to backend root, append /api
-  if (API.startsWith('http')) return `${API}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
-  // For relative /api, return as-is
-  return endpoint.startsWith('/api') ? endpoint : `/api/${endpoint}`;
+  const base = getBaseURL();
+  // Ensure /api prefix
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const apiPath = path.startsWith('/api') ? path : `/api${path}`;
+  return base ? `${base}${apiPath}` : apiPath;
 };
 
 export function AuthProvider({ children }) {
