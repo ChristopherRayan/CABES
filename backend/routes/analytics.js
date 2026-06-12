@@ -18,6 +18,34 @@ router.post('/pageview', async (req, res) => {
   } catch (err) { res.json({ ok: false }); } // never fail silently
 });
 
+// POST /api/analytics/seed — admin: seed mock data for last 30 days
+router.post('/seed', protect, async (req, res) => {
+  const PAGES = ['Home', 'About', 'Products', 'Leadership', 'Achievements', 'Contact', 'Shop'];
+  const PATHS = ['/', '/about', '/products', '/leadership', '/achievements', '/contact', '/shop'];
+  const COUNTRIES = ['Malawi', 'Kenya', 'Zambia', 'Tanzania', 'South Africa'];
+
+  const randIP = () => `${Math.floor(Math.random()*256)}.${Math.floor(Math.random()*256)}.${Math.floor(Math.random()*256)}.${Math.floor(Math.random()*256)}`;
+  const views = [];
+
+  for (let d = 29; d >= 0; d--) {
+    const date = new Date();
+    date.setDate(date.getDate() - d);
+    date.setHours(0,0,0,0);
+    const dailyViews = Math.floor(10 + Math.random() * 20);
+    for (let i = 0; i < dailyViews; i++) {
+      const idx = Math.floor(Math.random() * PAGES.length);
+      views.push({
+        page: PAGES[idx], path: PATHS[idx], ip: randIP(), userAgent: 'Mozilla/5.0', country: COUNTRIES[Math.floor(Math.random()*COUNTRIES.length)],
+        createdAt: new Date(date.getTime() + Math.random() * 86400000)
+      });
+    }
+  }
+
+  await PageView.insertMany(views);
+  AuditLog.create({ adminId: req.admin._id, adminName: req.admin.name, action: 'CREATE', resource: 'analytics', details: `Seeded ${views.length} mock pageviews` }).catch(()=>{});
+  res.json({ message: `Seeded ${views.length} pageviews`, count: views.length });
+});
+
 // GET /api/analytics — admin: full analytics
 router.get('/', protect, async (req, res) => {
   try {
