@@ -3,6 +3,14 @@ import React, { createContext, useContext, useState, useEffect, useCallback, use
 const AuthContext = createContext(null);
 const API = process.env.REACT_APP_API_URL || '/api';
 
+// Helper to build full endpoint URL
+const buildEndpoint = (endpoint) => {
+  // If API already points to backend root, append /api
+  if (API.startsWith('http')) return `${API}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  // For relative /api, return as-is
+  return endpoint.startsWith('/api') ? endpoint : `/api/${endpoint}`;
+};
+
 export function AuthProvider({ children }) {
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,7 +25,7 @@ export function AuthProvider({ children }) {
     tokenRef.current = t;
     let cancelled = false;
     if (t) {
-      fetch(`${API}/auth/me`, { headers: { Authorization: `Bearer ${t}` } })
+      fetch(`${buildEndpoint('/auth/me')}`, { headers: { Authorization: `Bearer ${t}` } })
         .then(r => r.json())
         .then(data => {
           if (!cancelled) {
@@ -32,7 +40,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, password) => {
-    const res = await fetch(`${API}/auth/login`, {
+    const res = await fetch(`${buildEndpoint('/auth/login')}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -51,7 +59,7 @@ export function AuthProvider({ children }) {
 
   const apiFetch = useCallback(async (path, options = {}) => {
     const token = getToken();
-    const res = await fetch(`${API}${path}`, {
+    const res = await fetch(`${buildEndpoint(path)}`, {
       ...options,
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...options.headers }
     });
