@@ -93,7 +93,7 @@ export default function ContentEditor() {
       .then(data => setContent(data))
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, []);
+  }, [apiFetch]);
 
   const handleSave = async (section, key, value, type, label) => {
     await apiFetch(`/content/${section}/${key}`, {

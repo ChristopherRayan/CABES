@@ -15,7 +15,7 @@ const FALLBACK_IMGS = {
 
 function getImg(product) {
   if (product.imageUrl && product.imageUrl.startsWith('http')) return product.imageUrl;
-  if (product.imageUrl && product.imageUrl.startsWith('/uploads')) return `http://localhost:5000${product.imageUrl}`;
+  if (product.imageUrl && product.imageUrl.startsWith('/uploads')) return `${process.env.REACT_APP_API_URL || ''}${product.imageUrl}`;
   return FALLBACK_IMGS[product.shortName?.toLowerCase()] || soybeansImg;
 }
 

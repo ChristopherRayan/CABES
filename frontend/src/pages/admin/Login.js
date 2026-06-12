@@ -12,6 +12,20 @@ export default function Login() {
   const { login, authReady } = useAuth();
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    if (!email || email.trim().length === 0) { setError('Email is required.'); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('Please enter a valid email address.'); return false; }
+    if (!password || password.length === 0) { setError('Password is required.'); return false; }
+    if (password.length < 8) { setError('Password must be at least 8 characters.'); return false; }
+    setError('');
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+    setLoading(true);
+
   if (!authReady) {
     return (
       <div className="login-page">
@@ -132,10 +146,10 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="login-hint">
-            <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            Default credentials: <strong>admin@cabes.mw</strong> / <strong>Cabes@2024!</strong>
-          </div>
+<div className="login-hint">
+             <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+             Secure admin access only — credentials managed by your deployment.
+           </div>
         </div>
       </div>
     </div>
